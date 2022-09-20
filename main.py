@@ -8,6 +8,8 @@ with open("assets/company.json") as f:
 
 with open("assets/user.json") as f:
     users_data = json.load(f)
+
+
 answers_path = "answers/"
 
 users_info = Users(users_data)

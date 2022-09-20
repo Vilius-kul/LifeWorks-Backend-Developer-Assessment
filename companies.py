@@ -2,7 +2,9 @@ from copy import deepcopy
 
 
 class Companies:
-    def __init__(self, users, companies) -> None:
+    def __init__(
+        self, users: list[dict[str, str]], companies: list[dict[str, str]]
+    ) -> None:
         self.users = deepcopy(users)
         self.companies = deepcopy(companies)
 
