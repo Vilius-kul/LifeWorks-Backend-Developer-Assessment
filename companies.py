@@ -1,7 +1,10 @@
+from copy import deepcopy
+
+
 class Companies:
     def __init__(self, users, companies) -> None:
-        self.users = users
-        self.companies = companies
+        self.users = deepcopy(users)
+        self.companies = deepcopy(companies)
 
     def _fetch_company(self, id, list_of_companies):
         for company in list_of_companies:

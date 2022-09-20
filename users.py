@@ -1,9 +1,10 @@
+from copy import deepcopy
 from datetime import date, datetime
 
 
 class Users:
     def __init__(self, users) -> None:
-        self.users = users
+        self.users = deepcopy(users)
 
     def add_full_name(self):
         with_fullname = []
