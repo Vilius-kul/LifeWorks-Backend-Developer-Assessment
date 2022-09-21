@@ -17,17 +17,17 @@ users_info = Users(users_data)
 # task_1
 users_with_fullname = users_info.add_full_name()
 with open(f"{answers_path}task_one.json", "w") as outfile:
-    json.dump(users_with_fullname, outfile)
+    json.dump(users_with_fullname, outfile, indent=4)
 
 
 # task_2
 users_older_than_30 = users_info.thirty_and_over()
 with open(f"{answers_path}task_two.json", "w") as outfile:
-    json.dump(users_older_than_30, outfile)
+    json.dump(users_older_than_30, outfile, indent=4)
 
 
 # task_3
 companies_info = Companies(users_data, companies_data)
 with_company_field = companies_info.add_company_field()
 with open(f"{answers_path}task_three.json", "w") as outfile:
-    json.dump(with_company_field, outfile)
+    json.dump(with_company_field, outfile, indent=4)

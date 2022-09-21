@@ -2,26 +2,24 @@ from copy import deepcopy
 
 
 class Companies:
-    def __init__(
-        self, users: list[dict[str, str]], companies: list[dict[str, str]]
-    ) -> None:
+    def __init__(self, users, companies):
         self.users = deepcopy(users)
         self.companies = deepcopy(companies)
 
-    def _fetch_company(self, id, list_of_companies):
-        for company in list_of_companies:
-            if company["id"] == id:
-                return company
+    def _user_with_company_field(self, user, company):
+        for k, v in company.items():
+            if user["company_id"] == int(k):
+                user["company_id"] = v
+        # rename key
+        user["company"] = user.pop("company_id")
+        return user
 
     def add_company_field(self):
         with_company_filed = []
+        # new dict wit company id as a key
+        companies = {f'{company["id"]}': company for company in self.companies}
         for user in self.users:
-            if "company" in user:
-                continue
-            else:
-                user["company"] = self._fetch_company(
-                    user["company_id"], self.companies
-                )
-                del user["company_id"]
-                with_company_filed.append(user)
+            with_company_filed.append(
+                self._user_with_company_field(user, companies)
+            )
         return with_company_filed

@@ -21,13 +21,14 @@ class Users:
         return with_fullname
 
     def _age(self, user: dict) -> int:
+        # data of birth string converted to datetime.date
         b_day = datetime.strptime(user["date_of_birth"], "%Y/%m/%d").date()
         today = date.today()
-        age = (
-            today.year
-            - b_day.year
-            - ((today.month, today.day) < (b_day.month, b_day.day))
-        )
+
+        # A bool that represents if today's day/month precedes the birth day/month
+        one_or_zero = (today.month, today.day) < (b_day.month, b_day.day)
+        year_difference = today.year - b_day.year
+        age = year_difference - one_or_zero
         return age
 
     def thirty_and_over(self) -> list[dict[str, str]]:
