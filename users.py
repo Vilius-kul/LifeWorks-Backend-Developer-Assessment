@@ -1,26 +1,28 @@
 from copy import deepcopy
 from datetime import date, datetime
+from typing import Dict, List
 
 
 class Users:
-    def __init__(self, users: list[dict[str, str]]) -> None:
+    def __init__(self, users: List[Dict[str, str]]) -> None:
         self.users = deepcopy(users)
 
-    def add_full_name(self) -> list[dict]:
-        with_fullname = []
+    def add_full_name(self) -> List[Dict[str, str]]:
+        with_fullname: List[Dict[str, str]] = []
         for user in self.users:
             if "full_name" in user:
                 continue
             else:
-                keys_list = list(user.keys())
-                values_list = list(user.values())
-                keys_list.insert(2, "full_name")
-                values_list.insert(2, f"{values_list[0]} {values_list[1]}")
-                with_fullname.append(dict(zip(keys_list, values_list)))
+                updated_user = dict(list(user.items())[:2])
+                updated_user[
+                    "full_name"
+                ] = f'{user.get("forename","")} {user.get("surname", "")}'
+                updated_user.update(dict(list(user.items())[2:]))
+                with_fullname.append(updated_user)
 
         return with_fullname
 
-    def _age(self, user: dict) -> int:
+    def _age(self, user: Dict) -> int:
         # data of birth string converted to datetime.date
         b_day = datetime.strptime(user["date_of_birth"], "%Y/%m/%d").date()
         today = date.today()
@@ -31,8 +33,8 @@ class Users:
         age = year_difference - one_or_zero
         return age
 
-    def thirty_and_over(self) -> list[dict[str, str]]:
-        thirty_and_over = []
+    def thirty_and_over(self) -> List[Dict[str, str]]:
+        thirty_and_over: List[Dict[str, str]] = []
         for user in self.users:
             if self._age(user) < 30:
                 continue
