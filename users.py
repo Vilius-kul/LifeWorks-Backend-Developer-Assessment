@@ -11,7 +11,7 @@ class Users:
         with_fullname: List[Dict[str, str]] = []
         for user in self.users:
             if "full_name" in user:
-                continue
+                with_fullname.append(user)
             else:
                 updated_user = dict(list(user.items())[:2])
                 updated_user[
