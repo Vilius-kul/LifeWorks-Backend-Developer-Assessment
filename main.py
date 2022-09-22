@@ -21,9 +21,9 @@ with open(f"{answers_path}task_one.json", "w") as outfile:
 
 
 # # task_2
-# users_older_than_30 = users_info.thirty_and_over()
-# with open(f"{answers_path}task_two.json", "w") as outfile:
-#     json.dump(users_older_than_30, outfile, indent=4)
+users_older_than_30 = users_info.thirty_and_over()
+with open(f"{answers_path}task_two.json", "w") as outfile:
+    json.dump(users_older_than_30, outfile, indent=4)
 
 
 # task_3
