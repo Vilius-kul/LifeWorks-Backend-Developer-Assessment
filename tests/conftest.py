@@ -1,6 +1,7 @@
-from typing import Dict, List
+from typing import Dict, List, Type
 
 import pytest
+from users import Users
 
 
 @pytest.fixture
@@ -54,3 +55,15 @@ def dummy_users_faulty_data() -> List[Dict[str, str]]:
         },
     ]
     return users
+
+
+@pytest.fixture
+def users_correct_data(dummy_users) -> Users:
+    users_instance = Users(dummy_users)
+    return users_instance
+
+
+@pytest.fixture
+def users_faulty_data(dummy_users_faulty_data) -> Users:
+    users_instance = Users(dummy_users_faulty_data)
+    return users_instance

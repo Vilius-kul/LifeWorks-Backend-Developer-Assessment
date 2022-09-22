@@ -22,7 +22,7 @@ class Users:
 
         return with_fullname
 
-    def _age(self, user: Dict) -> int:
+    def _age(self, user: Dict[str, str]) -> int:
         # data of birth string converted to datetime.date
         b_day = datetime.strptime(user["date_of_birth"], "%Y/%m/%d").date()
         today = date.today()
