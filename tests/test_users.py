@@ -39,3 +39,8 @@ def test_thirty_and_over_with_correct_data(users_correct_data):
     result = users_correct_data.thirty_and_over()
     for user in result:
         assert Users._age(user) >= 30
+
+
+def test_thirty_and_over_with_incorrect_data(users_faulty_data):
+    result = users_faulty_data.thirty_and_over()
+    assert result == []
