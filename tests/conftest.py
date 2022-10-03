@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import pytest
 from companies import Companies
@@ -6,7 +6,7 @@ from users import Users
 
 
 @pytest.fixture
-def dummy_users() -> List[Dict[str, str]]:
+def dummy_users() -> List[Dict[str, Any]]:
     users = [
         {
             "forename": "Jane",
@@ -27,7 +27,7 @@ def dummy_users() -> List[Dict[str, str]]:
 
 
 @pytest.fixture
-def dummy_users_faulty_data() -> List[Dict[str, str]]:
+def dummy_users_faulty_data() -> List[Dict[str, Any]]:
     users = [
         {
             "forename": "Jane",
@@ -59,7 +59,7 @@ def dummy_users_faulty_data() -> List[Dict[str, str]]:
 
 
 @pytest.fixture
-def dummy_companies() -> List[Dict[str, str]]:
+def dummy_companies() -> List[Dict[str, Any]]:
     companies = [
         {
             "id": 1,
