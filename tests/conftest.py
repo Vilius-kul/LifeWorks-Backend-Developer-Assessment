@@ -1,6 +1,7 @@
-from typing import Dict, List, Type
+from typing import Dict, List
 
 import pytest
+from companies import Companies
 from users import Users
 
 
@@ -58,6 +59,31 @@ def dummy_users_faulty_data() -> List[Dict[str, str]]:
 
 
 @pytest.fixture
+def dummy_companies() -> List[Dict[str, str]]:
+    companies = [
+        {
+            "id": 1,
+            "name": "Head Journal",
+            "headquarters": "San Francisco",
+            "industry": "Tech",
+        },
+        {
+            "id": 2,
+            "name": "Au Revoir Health",
+            "headquarters": "Paris",
+            "industry": "Health",
+        },
+        {
+            "id": 3,
+            "name": "Solomon Sisters Bank",
+            "headquarters": "London",
+            "industry": "Finance",
+        },
+    ]
+    return companies
+
+
+@pytest.fixture
 def users_correct_data(dummy_users) -> Users:
     users_instance = Users(dummy_users)
     return users_instance
@@ -67,3 +93,9 @@ def users_correct_data(dummy_users) -> Users:
 def users_faulty_data(dummy_users_faulty_data) -> Users:
     users_instance = Users(dummy_users_faulty_data)
     return users_instance
+
+
+@pytest.fixture
+def companies_correct_data(dummy_users, dummy_companies) -> Companies:
+    companies_instance = Companies(dummy_users, dummy_companies)
+    return companies_instance
