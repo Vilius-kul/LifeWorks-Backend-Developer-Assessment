@@ -7,7 +7,7 @@ from users import Users
 
 @pytest.fixture
 def dummy_users() -> List[Dict[str, Any]]:
-    users = [
+    users: List[Dict[str, Any]] = [
         {
             "forename": "Jane",
             "surname": "Smith",
@@ -28,7 +28,7 @@ def dummy_users() -> List[Dict[str, Any]]:
 
 @pytest.fixture
 def dummy_users_faulty_data() -> List[Dict[str, Any]]:
-    users = [
+    users: List[Dict[str, Any]] = [
         {
             "forename": "Jane",
             "date_of_birth": "2005/10/12",
@@ -60,7 +60,7 @@ def dummy_users_faulty_data() -> List[Dict[str, Any]]:
 
 @pytest.fixture
 def dummy_companies() -> List[Dict[str, Any]]:
-    companies = [
+    companies: List[Dict[str, Any]] = [
         {
             "id": 1,
             "name": "Head Journal",

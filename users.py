@@ -1,13 +1,13 @@
 from copy import deepcopy
 from datetime import date, datetime
-from typing import Dict, List
+from typing import Any, Dict, List
 
 
 class Users:
-    def __init__(self, users: List[Dict[str, str]]) -> None:
+    def __init__(self, users: List[Dict[str, Any]]) -> None:
         self.users = deepcopy(users)
 
-    def add_full_name(self) -> List[Dict[str, str]]:
+    def add_full_name(self) -> List[Dict[str, Any]]:
         with_fullname: List[Dict[str, str]] = []
         for user in self.users:
             if "full_name" in user:
@@ -23,7 +23,7 @@ class Users:
         return with_fullname
 
     @staticmethod
-    def _age(user: Dict[str, str]) -> int:
+    def _age(user: Dict[str, Any]) -> int:
         # data of birth string converted to datetime.date
         b_day = datetime.strptime(user["date_of_birth"], "%Y/%m/%d").date()
         today = date.today()
@@ -34,8 +34,8 @@ class Users:
         age = year_difference - one_or_zero
         return age
 
-    def thirty_and_over(self) -> List[Dict[str, str]]:
-        thirty_and_over: List[Dict[str, str]] = []
+    def thirty_and_over(self) -> List[Dict[str, Any]]:
+        thirty_and_over: List[Dict[str, Any]] = []
         for user in self.users:
             if self._age(user) < 30:
                 continue
