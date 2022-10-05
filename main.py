@@ -1,33 +1,30 @@
-import json
-
 from companies import Companies
+from read_data import DataReader
+from tasks import Tasks
 from users import Users
 
-with open("assets/company.json") as f:
-    companies_data = json.load(f)
 
-with open("assets/user.json") as f:
-    users_data = json.load(f)
+def main():
 
+    path_to_companies = "assets/company.json"
+    path_to_users = "assets/user.json"
+    answers_path = "answers/"
 
-answers_path = "answers/"
+    data = DataReader(path_to_users, path_to_companies)
 
-users_info = Users(users_data)
+    users_data = data.read_users()
+    companies_data = data.read_companies()
 
-# task_1
-users_with_fullname = users_info.add_full_name()
-with open(f"{answers_path}task_one.json", "w") as outfile:
-    json.dump(users_with_fullname, outfile, indent=4)
+    companies_info = Companies(users_data, companies_data)
+    users_info = Users(users_data)
 
-
-# # task_2
-users_older_than_30 = users_info.thirty_and_over()
-with open(f"{answers_path}task_two.json", "w") as outfile:
-    json.dump(users_older_than_30, outfile, indent=4)
+    tasks_instance = Tasks(users_info, companies_info, answers_path)
 
 
-# task_3
-companies_info = Companies(users_data, companies_data)
-with_company_field = companies_info.add_company_field()
-with open(f"{answers_path}task_three.json", "w") as outfile:
-    json.dump(with_company_field, outfile, indent=4)
+    tasks_instance.task_1()
+    tasks_instance.task_2()
+    tasks_instance.task_3()
+
+
+if __name__ == "__main__":
+    main()
