@@ -1,15 +1,24 @@
-# from unittest import mock
+from unittest import mock
 
-# import pytest
-# from read_data import DataReader
-
-
-# @mock.patch()
+import pytest
+from read_data import DataReader
 
 
-# def test_read_users_correct_data():
-#     pass
+@mock.patch("read_data.json.load")
+@mock.patch("read_data.open")
+def test_read_users_correct_data(mock_open, mock_json_load):
+    mock_data_reader = DataReader("", "")
+    mock_json_load.return_value = dict({"the_data": "This is real data"})
+    result = mock_data_reader.read_users()
+
+    assert result == {"the_data": "This is real data"}
 
 
-# def test_read_companies_correct_data():
-#     pass
+@mock.patch("read_data.json.load")
+@mock.patch("read_data.open")
+def test_read_companies_correct_data(mock_open, mock_json_load):
+    mock_data_reader = DataReader("", "")
+    mock_json_load.return_value = dict({"the_data": "This is real data"})
+    result = mock_data_reader.read_companies()
+
+    assert result == {"the_data": "This is real data"}
