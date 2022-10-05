@@ -20,6 +20,7 @@ def main():
 
     tasks_instance = Tasks(users_info, companies_info, answers_path)
 
+
     tasks_instance.task_1()
     tasks_instance.task_2()
     tasks_instance.task_3()
