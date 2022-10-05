@@ -1,17 +1,22 @@
+from typing import Any, Dict
+
 import pytest
 from companies import Companies
 
 
-def test_user_with_company_field_correct_data() -> None:
-    mock_company = Companies([{}], [{}])
-    user = {
+@pytest.fixture(autouse=True)
+def base_user() -> Dict[str, Any]:
+    return {
         "forename": "Jane",
         "surname": "Smith",
         "date_of_birth": "2001/10/12",
         "location": "London",
-        "company_id": 555,
     }
-    companies = {
+
+
+@pytest.fixture(autouse=True)
+def base_company() -> Dict[str, Any]:
+    return {
         "555": {
             "id": 555,
             "name": "Head Journal",
@@ -19,7 +24,16 @@ def test_user_with_company_field_correct_data() -> None:
             "industry": "Tech",
         }
     }
-    result = mock_company._user_with_company_field(user, companies)
+
+
+def test_user_with_company_field_correct_data(base_user, base_company) -> None:
+    mock_company = Companies([{}], [{}])
+    base_user.update(
+        {
+            "company_id": 555,
+        }
+    )
+    result = mock_company._user_with_company_field(base_user, base_company)
     assert result == {
         "forename": "Jane",
         "surname": "Smith",
@@ -34,48 +48,21 @@ def test_user_with_company_field_correct_data() -> None:
     }
 
 
-def test_user_without_company_field() -> None:
+def test_user_without_company_field(base_user, base_company) -> None:
     mock_company = Companies([{}], [{}])
+    print(base_user)
+    with pytest.raises(KeyError) as ex:
 
-    user = {
-        "forename": "Jane",
-        "surname": "Smith",
-        "date_of_birth": "2001/10/12",
-        "location": "London",
-    }
-    companies = {
-        "555": {
-            "id": 555,
-            "name": "Head Journal",
-            "headquarters": "San Francisco",
-            "industry": "Tech",
-        }
-    }
-
-    with pytest.raises(Exception) as ex:
-        result = mock_company._user_with_company_field(user, companies)
+        result = mock_company._user_with_company_field(base_user, base_company)
 
     assert "'company_id'" == str(ex.value)
 
 
-def test_user_empty_company_field() -> None:
+def test_user_empty_company_field(base_user, base_company) -> None:
     mock_company = Companies([{}], [{}])
-    user = {
-        "forename": "Jane",
-        "surname": "Smith",
-        "date_of_birth": "2001/10/12",
-        "location": "London",
-        "company_id": "",
-    }
-    companies = {
-        "555": {
-            "id": 555,
-            "name": "Head Journal",
-            "headquarters": "San Francisco",
-            "industry": "Tech",
-        }
-    }
-    result = mock_company._user_with_company_field(user, companies)
+    base_user.update({"company_id": ""})
+
+    result = mock_company._user_with_company_field(base_user, base_company)
     assert result == {
         "forename": "Jane",
         "surname": "Smith",
@@ -85,17 +72,15 @@ def test_user_empty_company_field() -> None:
     }
 
 
-def test_user_company_field_without_companies_data() -> None:
+def test_user_company_field_without_companies_data(base_user) -> None:
     mock_company = Companies([{}], [{}])
-    user = {
-        "forename": "Jane",
-        "surname": "Smith",
-        "date_of_birth": "2001/10/12",
-        "location": "London",
-        "company_id": "",
-    }
+    base_user.update(
+        {
+            "company_id": 555,
+        }
+    )
     companies = {}
-    result = mock_company._user_with_company_field(user, companies)
+    result = mock_company._user_with_company_field(base_user, companies)
     assert result == {
         "forename": "Jane",
         "surname": "Smith",
@@ -105,24 +90,17 @@ def test_user_company_field_without_companies_data() -> None:
     }
 
 
-def test_user_with_company_field_incorrect_company_id() -> None:
+def test_user_with_company_field_incorrect_company_id(
+    base_user, base_company
+) -> None:
     mock_company = Companies([{}], [{}])
-    user = {
-        "forename": "Jane",
-        "surname": "Smith",
-        "date_of_birth": "2001/10/12",
-        "location": "London",
-        "company_id": 0,
-    }
-    companies = {
-        "555": {
-            "id": 555,
-            "name": "Head Journal",
-            "headquarters": "San Francisco",
-            "industry": "Tech",
+    base_user.update(
+        {
+            "company_id": 0,
         }
-    }
-    result = mock_company._user_with_company_field(user, companies)
+    )
+
+    result = mock_company._user_with_company_field(base_user, base_company)
     assert result == {
         "forename": "Jane",
         "surname": "Smith",
