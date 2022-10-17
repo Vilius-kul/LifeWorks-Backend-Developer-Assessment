@@ -23,7 +23,7 @@ def test_add_full_name_with_faulty_data(users_faulty_data) -> None:
 def test_age_with_correct_data() -> None:
     correct_dob = {"date_of_birth": "2001/10/12"}
     result = Users._age(correct_dob)
-    assert result == 20
+    assert result == 21
 
 
 def test_age_with_faulty_data() -> None:

@@ -5,7 +5,6 @@ from users import Users
 
 
 def main():
-
     path_to_companies = "assets/company.json"
     path_to_users = "assets/user.json"
     answers_path = "answers/"
@@ -19,7 +18,6 @@ def main():
     users_info = Users(users_data)
 
     tasks_instance = Tasks(users_info, companies_info, answers_path)
-
 
     tasks_instance.task_1()
     tasks_instance.task_2()
