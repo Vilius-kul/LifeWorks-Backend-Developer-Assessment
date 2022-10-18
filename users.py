@@ -13,11 +13,11 @@ class Users:
             if "full_name" in user:
                 with_fullname.append(user)
             else:
-                updated_user = dict(list(user.items())[:2])
+                updated_user = dict(list(user.items())[:2])  # type: ignore
                 updated_user[
                     "full_name"
                 ] = f'{user.get("forename","")} {user.get("surname", "")}'
-                updated_user.update(dict(list(user.items())[2:]))
+                updated_user.update(dict(list(user.items())[2:]))  # type: ignore
                 with_fullname.append(updated_user)
 
         return with_fullname
