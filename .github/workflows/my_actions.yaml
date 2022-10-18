@@ -18,12 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install poetry
-        uses: pipx install poetry
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-          cache: 'poetry'
-      - run: poetry install
-      - run: poetry run pytest
+          cache: 'pip' # caching pip dependencies
+      - run: pip install -r requirements.txt
+      - run: pytest
 
