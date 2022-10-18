@@ -22,8 +22,6 @@ class Companies:
         # new dict wit company id as a key
         companies = {f'{company["id"]}': company for company in self.companies}
         for user in self.users:
-            with_company_filed.append(
-                self._user_with_company_field(user, companies)
-            )
+            with_company_filed.append(self._user_with_company_field(user, companies))
 
         return with_company_filed

@@ -90,9 +90,7 @@ def test_user_company_field_without_companies_data(base_user) -> None:
     }
 
 
-def test_user_with_company_field_incorrect_company_id(
-    base_user, base_company
-) -> None:
+def test_user_with_company_field_incorrect_company_id(base_user, base_company) -> None:
     mock_company = Companies([{}], [{}])
     base_user.update(
         {

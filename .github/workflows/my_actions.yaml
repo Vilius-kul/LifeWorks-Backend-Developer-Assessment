@@ -4,14 +4,18 @@ name: Continuous Integration
 on: push
 
 jobs:
-  test-my-actions:
-    name: Hello Hello
+  linting:
+    name: Lint using
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Sanity check
-        run: echo "It is working!"
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - name: Run Black
+        run: black --diff --check .
 
   test:
     name: Run tests in parallel
