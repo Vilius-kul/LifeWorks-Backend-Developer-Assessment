@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "tech-task"
+version = "0.1.0"
+description = "Backend assessment"
+authors = ["Vilius Kulinas <vilius.kulinas@gmail.com>"]
+readme = "README.md"
+packages = [{include = "tech_task"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytest = "7.1.3"
+pytest-cov = "3.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
