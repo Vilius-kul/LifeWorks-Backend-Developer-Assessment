@@ -14,8 +14,9 @@ jobs:
         with:
           python-version: '3.9'
           cache: 'pip'
+      - run: pip install -r requirements.txt
       - name: Run Black
-        run: black --diff --check
+        run: black --diff --check .
 
   test:
     name: Run tests in parallel
