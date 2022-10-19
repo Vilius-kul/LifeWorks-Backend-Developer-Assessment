@@ -5,7 +5,7 @@ on: push
 
 jobs:
   linting:
-    name: Lint using
+    name: Lint using Black, flake8, Mypy and isort
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,10 +15,19 @@ jobs:
           python-version: '3.9'
           cache: 'pip'
       - run: pip install -r requirements.txt
+
       - name: Run Black
         run: black --diff --check .
+
       - name: Run mypy
         run: mypy $(git ls-files '*.py')
+
+      - name: Run isort
+        run: isort --check --diff .
+
+      - name: Run flake8
+        run: flake8 --max-line-length=86
+
 
   test:
     name: Run tests in parallel
@@ -30,5 +39,4 @@ jobs:
           python-version: '3.9'
           cache: 'pip' # caching pip dependencies
       - run: pip install -r requirements.txt
-      - run: pytest
-
+      - run: pytest --cov-report term-missing:skip-covered --cov -vv

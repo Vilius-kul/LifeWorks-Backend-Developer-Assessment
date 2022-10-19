@@ -1,6 +1,7 @@
 from typing import Any, Dict, List
 
 import pytest
+
 from companies import Companies
 from users import Users
 

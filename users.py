@@ -17,7 +17,7 @@ class Users:
                 updated_user[
                     "full_name"
                 ] = f'{user.get("forename","")} {user.get("surname", "")}'
-                updated_user.update(dict(list(user.items())[2:]))  # type: ignore
+                updated_user.update(dict(list(user.items())[2:]))
                 with_fullname.append(updated_user)
 
         return with_fullname
@@ -28,7 +28,8 @@ class Users:
         b_day = datetime.strptime(user["date_of_birth"], "%Y/%m/%d").date()
         today = date.today()
 
-        # A bool that represents if today's day/month precedes the birth day/month
+        # A bool that represents if today's day/month precedes the
+        # birthday/month
         one_or_zero = (today.month, today.day) < (b_day.month, b_day.day)
         year_difference = today.year - b_day.year
         age = year_difference - one_or_zero
