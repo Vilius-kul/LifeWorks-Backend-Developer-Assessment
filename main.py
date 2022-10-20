@@ -4,7 +4,7 @@ from tasks import Tasks
 from users import Users
 
 
-def main():
+def main() -> None:
     path_to_companies = "assets/company.json"
     path_to_users = "assets/user.json"
     answers_path = "answers/"

@@ -3,3 +3,4 @@ __pycache__
 sandbox.py
 .coverage
 .pytest_cache
+.flake8

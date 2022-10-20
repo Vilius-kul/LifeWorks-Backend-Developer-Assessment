@@ -1,6 +1,7 @@
 from typing import Any, Dict
 
 import pytest
+
 from companies import Companies
 
 
@@ -52,8 +53,7 @@ def test_user_without_company_field(base_user, base_company) -> None:
     mock_company = Companies([{}], [{}])
     print(base_user)
     with pytest.raises(KeyError) as ex:
-
-        result = mock_company._user_with_company_field(base_user, base_company)
+        _ = mock_company._user_with_company_field(base_user, base_company)
 
     assert "'company_id'" == str(ex.value)
 
@@ -79,7 +79,7 @@ def test_user_company_field_without_companies_data(base_user) -> None:
             "company_id": 555,
         }
     )
-    companies = {}
+    companies: Dict[str, Any] = {}
     result = mock_company._user_with_company_field(base_user, companies)
     assert result == {
         "forename": "Jane",
@@ -91,7 +91,8 @@ def test_user_company_field_without_companies_data(base_user) -> None:
 
 
 def test_user_with_company_field_incorrect_company_id(
-    base_user, base_company
+    base_user,
+    base_company,
 ) -> None:
     mock_company = Companies([{}], [{}])
     base_user.update(
