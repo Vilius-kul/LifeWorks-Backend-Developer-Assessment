@@ -42,23 +42,23 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root
       #----------------------------------------------
-      #              run test suite
-      #----------------------------------------------
-      - name: Run tests
-        run: |
-          source .venv/bin/activate
-          pytest --cov-report term-missing:skip-covered --cov -vv
-      #----------------------------------------------
       #              Run Linters
       #----------------------------------------------
       - name: Run Black
         run: poetry run black --verbose **/*.py
 
       - name: Run mypy
-        run: poetry run mypy $(git ls-files '*.py')
+        run: poetry run mypy **/*.py
 
       - name: Run isort
         run: poetry run isort **/*.py
 
       - name: Run flake8
-        run: poetry run flake8 --max-line-length=86
+        run: poetry run flake8 --output-file=flake8-report.txt --tee
+      #----------------------------------------------
+      #              run test suite
+      #----------------------------------------------
+      - name: Run tests
+        run: |
+          source .venv/bin/activate
+          pytest --cov-report term-missing:skip-covered --cov -vv
