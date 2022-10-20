@@ -55,10 +55,10 @@ jobs:
         run: poetry run black --verbose **/*.py
 
       - name: Run mypy
-        run: mypy $(git ls-files '*.py')
+        run: poetry run mypy $(git ls-files '*.py')
 
       - name: Run isort
-        run: isort --check --diff .
+        run: poetry run isort **/*.py
 
       - name: Run flake8
-        run: flake8 --max-line-length=86
+        run: poetry run flake8 --max-line-length=86
