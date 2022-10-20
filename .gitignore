@@ -4,3 +4,5 @@ sandbox.py
 .coverage
 .pytest_cache
 .flake8
+.mypy_cache
+.idea
