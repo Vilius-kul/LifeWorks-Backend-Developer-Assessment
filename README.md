@@ -56,12 +56,24 @@ Transform the user collection so each record contains a new `full_name` field as
 
 ```js
 {
-    "forename": "Jane",
-    "surname": "Smith",
-    "full_name": "Jane Smith",
-    "date_of_birth": "2001/10/12",
-    "location": "London",
-    "company_id": 3
+    "forename"
+:
+    "Jane",
+        "surname"
+:
+    "Smith",
+        "full_name"
+:
+    "Jane Smith",
+        "date_of_birth"
+:
+    "2001/10/12",
+        "location"
+:
+    "London",
+        "company_id"
+:
+    3
 }
 ```
 
@@ -79,15 +91,35 @@ and the `id` field contained in the company collection.
 
 ```js
 {
-    "forename": "Jane",
-    "surname": "Smith",
-    "date_of_birth": "2001/10/12",
-    "location": "London",
-    "company": {
-        "id": 3,
-        "name": "Solomon Sisters Bank",
-        "headquarters": "London",
-        "industry": "Finance"
+    "forename"
+:
+    "Jane",
+        "surname"
+:
+    "Smith",
+        "date_of_birth"
+:
+    "2001/10/12",
+        "location"
+:
+    "London",
+        "company"
+:
+    {
+        "id"
+    :
+        3,
+            "name"
+    :
+        "Solomon Sisters Bank",
+            "headquarters"
+    :
+        "London",
+            "industry"
+    :
+        "Finance"
     }
 }
 ```
+
+### My solution [here](Usage.md)!
