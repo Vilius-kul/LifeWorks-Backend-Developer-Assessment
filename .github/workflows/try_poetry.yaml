@@ -52,7 +52,7 @@ jobs:
       #              Run Linters
       #----------------------------------------------
       - name: Run Black
-        run: black --diff --check .
+        run: poetry run black --verbose **/*.py
 
       - name: Run mypy
         run: mypy $(git ls-files '*.py')
