@@ -48,10 +48,10 @@ jobs:
         run: poetry run black --verbose **/*.py
 
       - name: Run mypy
-        run: poetry run mypy **/*.py
+        run: poetry run mypy .
 
       - name: Run isort
-        run: poetry run isort **/*.py
+        run: poetry run isort .
 
       - name: Run flake8
         run: poetry run flake8 --output-file=flake8-report.txt --tee
